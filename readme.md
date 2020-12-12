@@ -2,9 +2,11 @@
 
 - 灵感 https://github.com/dheera/mnist-clock
 
+- 效果
 
+![](epd29-mnist-clock.png)
 
-## 墨水屏
+## 1. 墨水屏
 - 型号：微雪 2.9inch e-Paper Module， 带驱动板，8PIN
 - 工作电压：3.3V/5V
 - 通信接口：SPI
@@ -27,7 +29,7 @@
 | BUSY        | 18                    |
 
 
-## 树莓派基本配置
+## 2. 树莓派基本配置
 
 - 详细步骤见帮助文档: https://www.waveshare.net/wiki/2.9inch_e-Paper_Module
 - 程序源码在 github 也有: https://github.com/waveshare/e-Paper
@@ -72,7 +74,7 @@ cd python/examples
 sudo python3 epd_2in9bc_test.py
 ```
 
-## mnist 数据集
+## 3. 处理 mnist 数据集，提取 index
 
 - 下载 `mnist.npz`
 https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
@@ -80,25 +82,31 @@ https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
 - 我们使用`x_train`的60000个数字，把0-9对应的序号(index)，提取出来，保存到 `mnist_index.json`
 
 
-## 测试用 opencv 显示时间
+## 4. 先测试下用 opencv 显示时间
 
-![](/images/mnist-clock.png)
+![](cv2-mnist-clock.png)
 
 
-## 所有文件
+## 5. 在墨水屏显示时间
+
+详见 `epd29_mnist_clock.py`
+
+---
+
+## 所有的文件
 
 ``` bash
 .
 ├── cv2_mnist_clock.py     # 测试用 opencv 显示时间
 ├── epd29_mnist_clock.py   # 在墨水屏显示时间
 ├── epd_2in9_test.py
-├── gen_mnist_index.py     # 提取序号(index)
 ├── lib
 │ ├── epd2in9.py
 │ ├── epdconfig.py
 │ ├── Font.ttc
 │ └── __init__.py
-├── mnist_index.json
-└── mnist.npz
+├── mnist_index_gen.py     # 提取序号(index)
+├── mnist_index.json       # 保存序号(index)，以 json 格式
+└── mnist.npz              # mnist 原始数据集 
 
 ```
