@@ -4,7 +4,7 @@
 
 - 效果
 
-![](epd29-mnist-clock.jpg)
+![](epd29_mnist_clock.jpg)
 
 ## 1. 墨水屏
 - 型号：微雪 2.9inch e-Paper Module， 带驱动板，8PIN
