@@ -14,7 +14,7 @@ from lib import epd2in9
 
 
 logging.basicConfig(level=logging.DEBUG)
-font = ImageFont.truetype('lib/Font.ttc', 18)
+font = ImageFont.truetype('lib/jetbrains-mono.ttf', 22)
 
 # load mnist dataset
 with np.load('mnist.npz') as f:
@@ -26,7 +26,7 @@ with open('mnist_index.json', 'r') as f:
 
 gap = np.ones((28, 10)) * 255
 for i in [8, 9, 18, 19]:
-    for j in [4,5,6,]:
+    for j in [4, 5, 6]:
         gap[i][j] = 0
 
 def get_mnist_num(num):
@@ -35,7 +35,7 @@ def get_mnist_num(num):
     return 255 - x_train[idx]
 
 
-# === 0. init 
+# === 0. init
 logging.info('epd2in9 Demo')
 
 epd = epd2in9.EPD()
@@ -46,18 +46,18 @@ epd.Clear(0xFF)
 # === 1. show date & time
 logging.info('show date & time')
 
-def YMD(draw, x1=10, y1=5, x2=160, y2=30):
+def YMD(draw, x1=5, y1=2, x2=200, y2=24):
     draw.rectangle((x1, y1, x2, y2), fill=255)
-    draw.text((x1, y1), time.strftime('%Y-%m-%d  %a'), font = font, fill=0)
+    draw.text((x1, y1), time.strftime('%Y-%m-%d %a'), font=font, fill=0)
 
-def HMS(draw, x1=180, y1=5, x2=280, y2=30):
-    draw.rectangle((x1, y1, x2, y2), fill = 255)
-    draw.text((x1, y1), time.strftime('%H:%M'), font = font, fill=0)
+def HMS(draw, x1=210, y1=2, x2=290, y2=24):
+    draw.rectangle((x1, y1, x2, y2), fill=255)
+    draw.text((x1, y1), time.strftime('%H:%M'), font=font, fill=0)
     
-def MNIST(img, draw, mnist_img, x1=8, y1=30, x2=280, y2=120):
-    draw.rectangle((x1, y1, x2, y2), fill = 255)
+def MNIST(img, draw, mnist_img, x1=8, y1=25, x2=288, y2=125):
+    draw.rectangle((x1, y1, x2, y2), fill=255)
     mnist_img = Image.fromarray(mnist_img)
-    mnist_img = mnist_img.resize((38*2*3, 28*3))
+    mnist_img = mnist_img.resize((280, 100))
     img.paste(mnist_img, (x1, y1))
 
 # partial update
@@ -76,17 +76,11 @@ while (True):
     now_time = [h1, h2, m1, m2]
     print(f'{hour}:{mnt}:{sec}', last_time, now_time)
 
-    if -1 in last_time or (mnt == 0 and sec < 5) :
-        logging.info('partial update')
-        epd.init(epd.lut_full_update)
-        epd.Clear(0xFF)
-        time.sleep(1)
-
+    if -1 in last_time or (mnt==0 and sec<5):
         logging.info('partial update')
         epd.init(epd.lut_partial_update)
         epd.Clear(0xFF)
         YMD(time_draw)
-        time.sleep(1)
 
     for i in range(4):
         if last_time[i] != now_time[i]:
@@ -94,15 +88,14 @@ while (True):
             last_time[i] = now_time[i]
             mnist_image = np.hstack((last_imgs[0], last_imgs[1], gap,
                                      last_imgs[2], last_imgs[3]))
-            HMS(time_draw)  
+            HMS(time_draw)
             MNIST(time_image, time_draw, mnist_image)
-            
             epd.display(epd.getbuffer(time_image))
-            time.sleep(1)
-    
+            time.sleep(0.3)
+
     time.sleep(3)
 
-# Clear        
+# Clear
 logging.info('Clear...')
 epd.init(epd.lut_full_update)
 epd.Clear(0xFF)
