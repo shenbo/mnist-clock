@@ -46,7 +46,7 @@ epd.Clear(0xFF)
 # === 1. show date & time
 logging.info('show date & time')
 
-def YMD(draw, x1=5, y1=2, x2=200, y2=24):
+def YMD(draw, x1=10, y1=2, x2=200, y2=24):
     draw.rectangle((x1, y1, x2, y2), fill=255)
     draw.text((x1, y1), time.strftime('%Y-%m-%d %a'), font=font, fill=0)
 
