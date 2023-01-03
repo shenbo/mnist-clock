@@ -1,5 +1,7 @@
 ## 用树莓派和墨水屏做一个 mnist-clock
 
+pico-w 版见： pico-mnist-clock/readme.md 
+
 - 灵感 https://github.com/dheera/mnist-clock
 
 - 效果
