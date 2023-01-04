@@ -5,11 +5,8 @@ import ntptime
 import Pico_ePaper29 as epd29
 
 # === 0. wifi config ==========================
-ssid = 'shen'
-pswd = 'xx12345678'
-
-ssid = 'ES-924310'
-pswd = 'xx12345678'
+ssid = 'aaa'
+pswd = 'xxx'
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
