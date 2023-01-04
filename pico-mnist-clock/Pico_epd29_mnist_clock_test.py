@@ -7,9 +7,10 @@ gc.collect()
 print("mem: ", gc.mem_free())
 
 # === 1. load mnist font lib
+# 读取字符，返回一个由 '0' 或 '1' 组成的字符串，字符串长度为784。
 def get_mnist_font(num):
     SIZE = 98
-    NUM = 100    
+    NUM = 500    
     
     f = open('font_lib_{}.bin'.format(num), 'rb')
     f.seek(random.randrange(0, NUM) * SIZE)

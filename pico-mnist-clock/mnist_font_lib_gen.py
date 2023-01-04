@@ -2,7 +2,6 @@
 import json
 import numpy as np
 
-
 # 1.load mnist dataset
 with np.load('../mnist.npz') as f:
     x_train, y_train = f['x_train'], f['y_train']
@@ -10,7 +9,6 @@ with np.load('../mnist.npz') as f:
 
 with open('../mnist_index.json', 'r') as f:
     idx_dict = json.load(f)
-
 
 
 #%%
@@ -24,7 +22,6 @@ def draw_mnist_num(image):
         print(''.join(i for i in row))
 
 draw_mnist_num(x_train[0])
-
 
 
 #%%
