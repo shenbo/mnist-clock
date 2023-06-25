@@ -1,6 +1,3 @@
-[submodule "e_Paper"]
-	path = e_Paper
-	url = https://ghproxy.com/https://github.com/waveshare/e-Paper
 [submodule "ePaper"]
 	path = ePaper
 	url = https://ghproxy.com/https://github.com/waveshare/e-Paper
